@@ -3,34 +3,33 @@ import { parseBody } from '../../shared/chat-format.js';
 import { cast } from '../lib/site';
 interface Props { body: string }
 const msgs = parseBody(Astro.props.body, cast);
+// Escape, then turn bare links into anchors.
 const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
 const linkify = (s: string) => esc(s).replace(/https?:\/\/[^\s)]+/g, (u) => `<a href="${u}" rel="noopener">${u}</a>`).replace(/\n/g, '<br>');
 ---
 {msgs.length > 0 && (
   <div class="thread">
     {msgs.map((m) => m.who ? (
-      <div class:list={['cut', { me: (m.who as any).me, cont: m.cont }]}
+      <div class:list={['msg', { me: (m.who as any).me, cont: m.cont }]}
            style={(m.who as any).unknown ? '--bg:var(--unknown);--fg:var(--unknown-ink)' : `--bg:var(--c-${m.who.id});--fg:var(--i-${m.who.id})`}>
-        {!(m.who as any).me && !m.cont && <span class="who">{m.who.name.toLowerCase()}</span>}
-        <span class="bubble" set:html={linkify(m.text)} />
+        {!(m.who as any).me && !m.cont && <span class="who">{m.who.name}</span>}
+        <span class="b" set:html={linkify(m.text)} />
       </div>
     ) : (
-      <p class="aside-line" set:html={linkify(m.text)} />
+      <p class="aside" set:html={linkify(m.text)} />
     ))}
   </div>
 )}
 <style>
-.thread{display:flex;flex-direction:column;gap:6px;margin-top:18px}
-.cut{display:flex;flex-direction:column;align-items:flex-start;max-width:84%}
-.cut:not(.cont){margin-top:4px}
-.cut:first-child{margin-top:0}
-.cut:nth-child(3n){transform:rotate(-.8deg)}.cut:nth-child(3n+1){transform:rotate(.6deg)}
-.who{font-family:var(--hand);font-size:24px;line-height:1;margin:0 0 0 10px;transform:rotate(-3deg)}
-.bubble{display:inline-block;padding:10px 16px;border-radius:22px 22px 22px 7px;font-size:16px;line-height:1.38;border:3px solid #fff;
-  box-shadow:0 1px 1px rgba(0,0,0,.08),0 10px 18px -10px rgba(80,30,20,.5);background:var(--bg);color:var(--fg);overflow-wrap:anywhere}
-.bubble :global(a){color:inherit}
-.cut.me{align-self:flex-end;align-items:flex-end}
-.cut.me .bubble{border-radius:22px 22px 7px 22px}
-.aside-line{align-self:center;text-align:center;font-family:var(--hand);font-size:24px;line-height:1.1;color:var(--muted);margin:8px 0;transform:rotate(-1deg)}
-@media (max-width:480px){.cut{max-width:92%}}
+.thread{display:flex;flex-direction:column;gap:5px}
+.msg{display:flex;flex-direction:column;align-items:flex-start;max-width:82%}
+.msg:not(.cont){margin-top:6px}
+.msg:first-child{margin-top:0}
+.who{font-family:var(--mono);font-size:11px;color:var(--muted);margin:0 12px 2px}
+.b{background:var(--bg);color:var(--fg);padding:9px 14px;border-radius:20px 20px 20px 6px;font-size:15.5px;line-height:1.38;overflow-wrap:anywhere}
+.b :global(a){color:inherit}
+.msg.me{align-self:flex-end;align-items:flex-end}
+.msg.me .b{border-radius:20px 20px 6px 20px}
+.aside{align-self:center;text-align:center;font-family:var(--mono);font-size:12px;color:var(--muted);margin:6px 0}
+@media (max-width:480px){.msg{max-width:92%}}
 </style>

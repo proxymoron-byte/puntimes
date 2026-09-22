@@ -8,16 +8,14 @@ const count = (id: string) => list.filter((e) => speakersOf(e).includes(id)).len
   <div class="page-head"><h1>The cast</h1><p>Everyone who's been caught punning.</p></div>
   <ul class="people">
     {cast.map((p) => (
-      <li class="paper"><a href={url(`cast/${p.id}/`)}><i class="chip" style={`background-color:var(--c-${p.id})`}></i><b>{p.name.toLowerCase()}</b><span>{count(p.id)} entries</span></a></li>
+      <li><a href={url(`cast/${p.id}/`)}><i style={`background:var(--c-${p.id})`}></i><b>{p.name}</b><span>{count(p.id)} entries</span></a></li>
     ))}
   </ul>
 </Base>
 <style>
-.people{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:22px}
-.people li{padding:14px 14px 16px;border-radius:3px}
-.people li:nth-child(odd){transform:rotate(-1.5deg)}.people li:nth-child(even){transform:rotate(1.2deg)}
-.people a{display:flex;flex-direction:column;color:var(--ink);text-decoration:none}
-.chip{display:block;height:90px;border-radius:2px;background-image:var(--grain);background-blend-mode:soft-light}
-.people b{font-family:var(--hand);font-size:32px;font-weight:400;line-height:1;margin-top:10px}
-.people span{font-size:13px;color:var(--muted)}
+.people{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;max-width:600px}
+.people a{display:flex;flex-direction:column;gap:6px;padding:18px;border-radius:18px;background:var(--paper);box-shadow:var(--shadow);color:var(--ink);text-decoration:none}
+.people i{width:28px;height:28px;border-radius:50% 50% 50% 6px;display:block}
+.people b{font-size:20px}
+.people span{font-family:var(--mono);font-size:12px;color:var(--muted)}
 </style>

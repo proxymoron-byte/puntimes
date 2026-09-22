@@ -1,6 +1,6 @@
 [
   { "id": "renn", "name": "Renn", "me": true, "color": "#2B59C3", "ink": "#FFFFFF", "aliases": ["radostina", "rennie", "me", "you"] },
   { "id": "lev",  "name": "Lev",  "color": "#EE6A3C", "ink": "#2B0F06", "aliases": [] },
-  { "id": "mara", "name": "Mara", "color": "#F6BFCB", "ink": "#3A1420", "aliases": [] },
+  { "id": "mara", "name": "Mara", "color": "#F4C7CE", "ink": "#3A1420", "aliases": [] },
   { "id": "theo", "name": "Theo", "color": "#A7CBE8", "ink": "#0F2A42", "aliases": [] }
 ]

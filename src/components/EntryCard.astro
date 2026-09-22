@@ -1,59 +1,53 @@
 ---
 import Thread from './Thread.astro';
 import { type Entry, entryPath, fmtDate, imgSrc, url } from '../lib/site';
-import { WAVY } from '../lib/wavy';
 interface Props { entry: Entry; full?: boolean }
 const { entry, full = false } = Astro.props;
 const d = entry.data;
 const Heading = full ? 'h1' : 'h2';
 const kind = d.images.length ? 'comic' : d.via ? `via ${d.via}` : '';
-// stable, per-entry "hand placed" tilt and tape colour
-const h = [...entry.id].reduce((a, c) => (a * 31 + c.charCodeAt(0)) >>> 0, 7);
-const tilt = full ? 0 : ((h % 5) - 2) * 0.55;
-const tape = ['', 't1', 't2'][h % 3];
-const lower = d.title.charAt(0).toLowerCase() + d.title.slice(1);
 ---
-<article class:list={['entry', 'paper', { full, right: !full && h % 2 === 1 }]} style={`--r:${tilt}deg`}>
-  <span class:list={['tape', tape]}></span>
-  <Heading class="t">{full ? `${lower}:` : <a href={url(entryPath(entry))}>{lower}:</a>}</Heading>
-  <time datetime={d.date.toISOString().slice(0, 10)}>{fmtDate(d.date)}{kind && ` · ${kind}`}</time>
+<article class:list={['entry', 'paper', { full }]}>
+  <header>
+    <Heading class="t">{full ? d.title : <a href={url(entryPath(entry))}>{d.title}</a>}</Heading>
+    <time datetime={d.date.toISOString().slice(0, 10)}>{fmtDate(d.date)}{kind && ` · ${kind}`}</time>
+  </header>
   {d.images.length > 0 && (
-    <div class="frame">
-      <svg class="w" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true"><path d={WAVY} fill="none" stroke="#2B59C3" stroke-width="7" stroke-linejoin="round" vector-effect="non-scaling-stroke" /></svg>
-      <div class:list={['panels', `n${Math.min(d.images.length, 4)}`]}>
-        {d.images.map((src, i) => <img src={imgSrc(src)} alt={`${d.title}, panel ${i + 1}`} loading="lazy" />)}
-      </div>
+    <div class:list={['comic', `n${Math.min(d.images.length, 4)}`]}>
+      {d.images.map((src, i) => <img src={imgSrc(src)} alt={`${d.title}, panel ${i + 1}`} loading="lazy" />)}
     </div>
   )}
   {d.caption && <p class="caption">{d.caption}</p>}
   <Thread body={entry.body ?? ''} />
   {(d.groan != null || d.tags.length > 0) && (
     <footer>
-      {d.groan != null && <span class="stamp" title={`groan-o-meter: ${d.groan} out of 5`}><span>groan<b>{d.groan}/5</b></span></span>}
-      {d.tags.map((t, i) => <a class:list={['tag', { alt: i % 2 }]} href={url(`tags/${t}/`)}>{t.replace(/-/g, ' ')}</a>)}
+      {d.groan != null && (
+        <span class="groan" title={`${d.groan} out of 5`}>groan-o-meter
+          {[1, 2, 3, 4, 5].map((n) => <b class={n <= d.groan! ? 'f' : ''}></b>)}
+        </span>
+      )}
+      {d.tags.map((t) => <a class="tag" href={url(`tags/${t}/`)}>#{t}</a>)}
     </footer>
   )}
 </article>
 <style>
-.entry{padding:28px 24px 22px;border-radius:3px;transform:rotate(var(--r));max-width:580px}
-.entry.right{margin-left:auto}
-.entry.full{max-width:none;padding:34px clamp(18px,4vw,36px) 26px}
-.t{font-family:var(--hand);font-size:42px;line-height:.9;font-weight:400}
-.full .t{font-size:clamp(46px,7vw,64px)}
-.t a{color:inherit;text-decoration:none}.t a:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
-time{display:block;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:6px}
-.frame{position:relative;padding:22px 24px;margin-top:16px}
-.frame .w{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.panels{display:grid;gap:8px;position:relative}
-.panels.n2,.panels.n4{grid-template-columns:1fr 1fr}
-.panels.n3{grid-template-columns:repeat(3,1fr)}
-.panels img{width:100%;display:block;border:2px solid var(--ink);background:#FFFDF8}
-.caption{font-family:var(--hand);font-size:27px;line-height:1.05;margin:12px 0 0;transform:rotate(-1.5deg)}
-footer{display:flex;align-items:center;gap:10px 12px;flex-wrap:wrap;margin-top:22px}
-.stamp{width:62px;height:62px;border-radius:50%;border:2px dashed var(--coral);color:var(--coral);display:grid;place-items:center;text-align:center;font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;line-height:1.1;transform:rotate(-12deg);flex:none}
-.stamp b{display:block;font-family:var(--serif);font-size:20px;letter-spacing:0;font-weight:600}
-.tag{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 16px 5px 10px;background:var(--sky);color:#0F2A42;clip-path:polygon(0 0,100% 0,94% 50%,100% 100%,0 100%);text-decoration:none}
-.tag.alt{background:var(--butter);color:#3A2A05}
-.tag:hover{filter:brightness(.95)}
-@media (max-width:520px){.panels.n3{gap:5px}.t{font-size:36px}}
+.entry{border-radius:18px;padding:20px 20px 16px}
+.entry.full{padding:28px 24px 20px}
+header{display:flex;justify-content:space-between;align-items:baseline;gap:6px 12px;flex-wrap:wrap;margin-bottom:16px}
+.t{font-size:21px;font-weight:700;letter-spacing:-.015em}
+.full .t{font-size:clamp(28px,4vw,36px);font-weight:800;letter-spacing:-.025em}
+.t a{color:inherit;text-decoration:none}.t a:hover{text-decoration:underline;text-decoration-thickness:2px}
+time{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.comic{display:grid;gap:8px;margin-bottom:10px}
+.comic.n2,.comic.n4{grid-template-columns:1fr 1fr}
+.comic.n3{grid-template-columns:repeat(3,1fr)}
+.comic img{width:100%;border:1.5px solid var(--ink);border-radius:6px;display:block;background:#fff}
+.caption{font-size:14px;font-style:italic;color:var(--muted);margin:0 0 14px}
+footer{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-top:16px;padding-top:12px;border-top:1px dashed var(--line);font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.groan{display:inline-flex;gap:3px;align-items:center}
+.groan b{width:9px;height:9px;border-radius:50%;background:#DCD6CF;display:inline-block}
+.groan b:first-of-type{margin-left:4px}
+.groan b.f{background:var(--coral)}
+.tag{color:var(--accent);text-decoration:none}
+@media (max-width:480px){.comic.n3{grid-template-columns:1fr}}
 </style>
