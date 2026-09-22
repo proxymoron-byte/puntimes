@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro';
+import Feed from '../../components/Feed.astro';
+import { allEntries, cast, speakersOf } from '../../lib/site';
+export async function getStaticPaths() {
+  const list = await allEntries();
+  return cast.map((p) => ({ params: { id: p.id }, props: { person: p, entries: list.filter((e) => speakersOf(e).includes(p.id)) } }));
+}
+const { person, entries } = Astro.props;
+---
+<Base active="Cast" title={person.name}>
+  <div class="page-head"><div class="eyebrow">{entries.length} entries</div><h1><i class="dot" style={`background:var(--c-${person.id})`}></i>{person.name}</h1></div>
+  <Feed entries={entries} />
+</Base>
+<style>.dot{display:inline-block;width:.6em;height:.6em;border-radius:50% 50% 50% 4px;margin-right:.3em}</style>

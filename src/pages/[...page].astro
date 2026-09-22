@@ -1,0 +1,16 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '../layouts/Base.astro';
+import Feed from '../components/Feed.astro';
+import { allEntries, site, url } from '../lib/site';
+export const getStaticPaths = (async ({ paginate }) => paginate(await allEntries(), { pageSize: site.perPage })) satisfies GetStaticPaths;
+const { page } = Astro.props;
+const n = (p: string | undefined) => p && url(p.replace(import.meta.env.BASE_URL.replace(/\/$/, ''), ''));
+---
+<Base active="Feed" title={page.currentPage > 1 ? `Page ${page.currentPage}` : undefined}>
+  <Feed entries={page.data} />
+  <nav class="pager">
+    <span>{page.url.prev && <a href={n(page.url.prev)}>← newer</a>}</span>
+    <span>{page.url.next && <a href={n(page.url.next)}>older →</a>}</span>
+  </nav>
+</Base>

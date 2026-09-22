@@ -1,0 +1,16 @@
+name = "punbot"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+
+[vars]
+GITHUB_REPO = "YOUR-GITHUB-USERNAME/puntimes"   # owner/repo
+GITHUB_BRANCH = "main"
+SLACK_CHANNEL_ID = "C0000000000"                 # the #puntimes channel (right-click channel > Copy link; ID is the last part)
+SLACK_USER_ID = "U0000000000"                    # you (Slack profile > ⋮ > Copy member ID)
+SITE_URL = "https://YOUR-GITHUB-USERNAME.github.io/puntimes/"
+TIMEZONE = "Europe/Madrid"
+
+# Secrets, set once with:
+#   npx wrangler secret put SLACK_SIGNING_SECRET
+#   npx wrangler secret put SLACK_BOT_TOKEN
+#   npx wrangler secret put GITHUB_TOKEN

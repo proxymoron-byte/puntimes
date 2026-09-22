@@ -1,0 +1,21 @@
+---
+import Base from '../../layouts/Base.astro';
+import { allEntries, cast, speakersOf, url } from '../../lib/site';
+const list = await allEntries();
+const count = (id: string) => list.filter((e) => speakersOf(e).includes(id)).length;
+---
+<Base active="Cast" title="Cast">
+  <div class="page-head"><h1>The cast</h1><p>Everyone who's been caught punning.</p></div>
+  <ul class="people">
+    {cast.map((p) => (
+      <li><a href={url(`cast/${p.id}/`)}><i style={`background:var(--c-${p.id})`}></i><b>{p.name}</b><span>{count(p.id)} entries</span></a></li>
+    ))}
+  </ul>
+</Base>
+<style>
+.people{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;max-width:600px}
+.people a{display:flex;flex-direction:column;gap:6px;padding:18px;border:1px solid var(--line);border-radius:18px;background:var(--paper);color:var(--ink);text-decoration:none}
+.people i{width:28px;height:28px;border-radius:50% 50% 50% 6px;display:block}
+.people b{font-size:20px}
+.people span{font-family:var(--mono);font-size:12px;color:var(--muted)}
+</style>

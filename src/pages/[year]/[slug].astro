@@ -1,0 +1,20 @@
+---
+import Base from '../../layouts/Base.astro';
+import EntryCard from '../../components/EntryCard.astro';
+import { allEntries, entryPath, url } from '../../lib/site';
+export async function getStaticPaths() {
+  const list = await allEntries();
+  return list.map((entry, i) => {
+    const [year, slug] = entryPath(entry).split('/');
+    return { params: { year, slug }, props: { entry, newer: list[i - 1], older: list[i + 1] } };
+  });
+}
+const { entry, newer, older } = Astro.props;
+---
+<Base title={entry.data.title}>
+  <div class="feed"><EntryCard entry={entry} full /></div>
+  <nav class="pager">
+    <span>{newer && <a href={url(entryPath(newer))}>← {newer.data.title}</a>}</span>
+    <span>{older && <a href={url(entryPath(older))}>{older.data.title} →</a>}</span>
+  </nav>
+</Base>

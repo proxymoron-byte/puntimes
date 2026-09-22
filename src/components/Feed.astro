@@ -1,0 +1,8 @@
+---
+import EntryCard from './EntryCard.astro';
+import type { Entry } from '../lib/site';
+const { entries } = Astro.props as { entries: Entry[] };
+---
+<div class="feed">
+  {entries.length ? entries.map((e) => <EntryCard entry={e} />) : <p>Nothing here yet.</p>}
+</div>

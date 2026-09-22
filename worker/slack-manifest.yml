@@ -1,0 +1,26 @@
+# Slack: api.slack.com/apps > Create New App > From an app manifest > paste this.
+# After deploying the worker, replace the request_url with your worker's URL.
+display_information:
+  name: Punbot
+  description: Publishes #puntimes posts to Pun Times with Phriends
+  background_color: "#2f4bff"
+features:
+  bot_user:
+    display_name: Punbot
+    always_online: false
+oauth_config:
+  scopes:
+    bot:
+      - channels:history
+      - groups:history
+      - chat:write
+      - files:read
+settings:
+  event_subscriptions:
+    request_url: https://punbot.YOUR-SUBDOMAIN.workers.dev/
+    bot_events:
+      - message.channels
+      - message.groups
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  token_rotation_enabled: false

@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro';
+import Feed from '../../components/Feed.astro';
+import { allEntries } from '../../lib/site';
+export async function getStaticPaths() {
+  const list = await allEntries();
+  const tags = [...new Set(list.flatMap((e) => e.data.tags))];
+  return tags.map((tag) => ({ params: { tag }, props: { tag, entries: list.filter((e) => e.data.tags.includes(tag)) } }));
+}
+const { tag, entries } = Astro.props;
+---
+<Base title={`#${tag}`}>
+  <div class="page-head"><div class="eyebrow">{entries.length} entries</div><h1>#{tag}</h1></div>
+  <Feed entries={entries} />
+</Base>

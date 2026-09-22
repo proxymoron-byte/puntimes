@@ -1,0 +1,10 @@
+---
+import Base from '../layouts/Base.astro';
+import Feed from '../components/Feed.astro';
+import { allEntries, isComic } from '../lib/site';
+const list = (await allEntries()).filter(isComic);
+---
+<Base active="Comics" title="Comics">
+  <div class="page-head"><div class="eyebrow">{list.length} comics</div><h1>Comics</h1><p>The banter, drawn.</p></div>
+  <Feed entries={list} />
+</Base>

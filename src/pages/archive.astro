@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import { allEntries, entryPath, url } from '../lib/site';
+const list = await allEntries();
+const years = [...new Set(list.map((e) => e.data.date.getUTCFullYear()))];
+const md = (d: Date) => d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', timeZone: 'UTC' });
+---
+<Base active="Archive" title="Archive">
+  <div class="page-head"><div class="eyebrow">{list.length} entries</div><h1>Archive</h1></div>
+  {years.map((y) => (
+    <section class="yr">
+      <h2>{y}</h2>
+      <ul>{list.filter((e) => e.data.date.getUTCFullYear() === y).map((e) => (
+        <li><time>{md(e.data.date)}</time><a href={url(entryPath(e))}>{e.data.title}</a>{e.data.images.length > 0 && <span>comic</span>}</li>
+      ))}</ul>
+    </section>
+  ))}
+</Base>
+<style>
+.yr{max-width:600px;margin-bottom:28px}
+.yr h2{font-size:22px;font-weight:800;margin-bottom:8px}
+ul{list-style:none;margin:0;padding:0}
+li{display:flex;gap:14px;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--line)}
+time,span{font-family:var(--mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+time{min-width:52px}
+a{color:var(--ink);text-decoration:none}a:hover{color:var(--accent)}
+</style>

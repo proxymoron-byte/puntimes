@@ -1,0 +1,53 @@
+---
+import Thread from './Thread.astro';
+import { type Entry, entryPath, fmtDate, imgSrc, url } from '../lib/site';
+interface Props { entry: Entry; full?: boolean }
+const { entry, full = false } = Astro.props;
+const d = entry.data;
+const Heading = full ? 'h1' : 'h2';
+const kind = d.images.length ? 'comic' : d.via ? `via ${d.via}` : '';
+---
+<article class:list={['entry', { full }]}>
+  <header>
+    <Heading class="t">{full ? d.title : <a href={url(entryPath(entry))}>{d.title}</a>}</Heading>
+    <time datetime={d.date.toISOString().slice(0, 10)}>{fmtDate(d.date)}{kind && ` · ${kind}`}</time>
+  </header>
+  {d.images.length > 0 && (
+    <div class:list={['comic', `n${Math.min(d.images.length, 4)}`]}>
+      {d.images.map((src, i) => <img src={imgSrc(src)} alt={`${d.title}, panel ${i + 1}`} loading="lazy" />)}
+    </div>
+  )}
+  {d.caption && <p class="caption">{d.caption}</p>}
+  <Thread body={entry.body ?? ''} />
+  {(d.groan != null || d.tags.length > 0) && (
+    <footer>
+      {d.groan != null && (
+        <span class="groan" title={`${d.groan} out of 5`}>groan-o-meter
+          {[1, 2, 3, 4, 5].map((n) => <b class={n <= d.groan! ? 'f' : ''}></b>)}
+        </span>
+      )}
+      {d.tags.map((t) => <a class="tag" href={url(`tags/${t}/`)}>#{t}</a>)}
+    </footer>
+  )}
+</article>
+<style>
+.entry{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px 20px 16px}
+.entry.full{padding:28px 24px 20px}
+header{display:flex;justify-content:space-between;align-items:baseline;gap:6px 12px;flex-wrap:wrap;margin-bottom:16px}
+.t{font-size:21px;font-weight:700;letter-spacing:-.015em}
+.full .t{font-size:clamp(28px,4vw,36px);font-weight:800;letter-spacing:-.025em}
+.t a{color:inherit;text-decoration:none}.t a:hover{text-decoration:underline;text-decoration-thickness:2px}
+time{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.comic{display:grid;gap:8px;margin-bottom:10px}
+.comic.n2,.comic.n4{grid-template-columns:1fr 1fr}
+.comic.n3{grid-template-columns:repeat(3,1fr)}
+.comic img{width:100%;border:2px solid var(--ink);border-radius:4px;display:block;background:#fff}
+.caption{font-family:var(--hand);font-size:18px;color:var(--muted);margin:0 0 14px}
+footer{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-top:16px;padding-top:12px;border-top:1px dashed var(--line);font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.groan{display:inline-flex;gap:3px;align-items:center}
+.groan b{width:9px;height:9px;border-radius:50%;background:var(--line);display:inline-block}
+.groan b:first-of-type{margin-left:4px}
+.groan b.f{background:var(--ink)}
+.tag{color:var(--accent);text-decoration:none}
+@media (max-width:480px){.comic.n3{grid-template-columns:1fr}}
+</style>
