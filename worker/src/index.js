@@ -17,7 +17,10 @@ export default {
   async fetch(req, env, ctx) {
     if (req.method !== 'POST') return new Response('Punbot is running.', { status: 200 });
     const raw = await req.text();
-    if (!(await verifySlack(req, raw, env.SLACK_SIGNING_SECRET))) return new Response('bad signature', { status: 401 });
+    if (!(await verifySlack(req, raw, env.SLACK_SIGNING_SECRET))) {
+      console.warn('rejected request: signature check failed', { hasSecret: !!env.SLACK_SIGNING_SECRET, secretLength: (env.SLACK_SIGNING_SECRET || '').length, hasTimestamp: !!req.headers.get('x-slack-request-timestamp') });
+      return new Response('bad signature', { status: 401 });
+    }
 
     const body = JSON.parse(raw);
     if (body.type === 'url_verification') return new Response(body.challenge);
