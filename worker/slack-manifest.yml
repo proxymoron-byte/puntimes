@@ -17,7 +17,7 @@ oauth_config:
       - files:read
 settings:
   event_subscriptions:
-    request_url: https://punbot.YOUR-SUBDOMAIN.workers.dev/
+    request_url: https://punbot.renn-kar.workers.dev/
     bot_events:
       - message.channels
       - message.groups
