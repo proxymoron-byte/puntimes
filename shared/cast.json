@@ -1,6 +1,9 @@
 [
-  { "id": "renn", "name": "Renn", "me": true, "color": "#2B59C3", "ink": "#FFFFFF", "aliases": ["radostina", "rennie", "me", "you"] },
-  { "id": "lev",  "name": "Lev",  "color": "#EE6A3C", "ink": "#2B0F06", "aliases": [] },
-  { "id": "mara", "name": "Mara", "color": "#F4C7CE", "ink": "#3A1420", "aliases": [] },
-  { "id": "theo", "name": "Theo", "color": "#A7CBE8", "ink": "#0F2A42", "aliases": [] }
+  { "id": "renn",  "name": "Renn",  "me": true, "color": "#2B59C3", "ink": "#FFFFFF", "aliases": ["radostina", "rennie", "r"] },
+  { "id": "lev",   "name": "Lev",   "color": "#EE6A3C", "ink": "#2B0F06", "aliases": ["l"] },
+  { "id": "kabir", "name": "Kabir", "color": "#A7CBE8", "ink": "#0F2A42", "aliases": ["кabir", "кабир"] },
+  { "id": "asad",  "name": "Asad",  "color": "#F4C7CE", "ink": "#3A1420", "aliases": [] },
+  { "id": "carl",  "name": "Carl",  "color": "#F3D98B", "ink": "#3A2A05", "aliases": [] },
+  { "id": "tania", "name": "Tania", "color": "#D8CFE6", "ink": "#2A2140", "aliases": [] },
+  { "id": "qi",    "name": "Qi",    "color": "#F4A07A", "ink": "#3A1405", "aliases": [] }
 ]

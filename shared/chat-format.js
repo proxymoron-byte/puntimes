@@ -23,6 +23,11 @@ export function parseBody(body, cast) {
   for (const raw of String(body || '').split(/\r?\n/)) {
     const line = raw.trimEnd();
     if (!line.trim()) continue;
+    if (/^\s*>/.test(line)) { // "> text" always continues the previous bubble (e.g. quoting someone)
+      const t = line.replace(/^\s*>\s?/, '');
+      if (msgs.length && msgs[msgs.length - 1].who) msgs[msgs.length - 1].text += '\n' + t; else msgs.push({ who: null, text: t });
+      continue;
+    }
     if (/^\s*\(.*\)\s*$/.test(line)) { msgs.push({ who: null, text: line.trim().slice(1, -1) }); continue; } // (stage direction)
     const m = line.match(/^\s*([^:\n]{1,32}):\s?(.*)$/);
     const who = m && (idx.get(norm(m[1])) || (/^[\p{L}][\p{L} .'-]{0,20}$/u.test(m[1].trim()) ? m[1].trim() : null));

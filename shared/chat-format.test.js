@@ -15,10 +15,10 @@ test('typed post with title, meta and me/lev lines', () => {
 });
 
 test('pasted WhatsApp (iOS + Android) sets date and via', () => {
-  const p = parseSlackPost('Boxes\n[02/09/2026, 18:01:22] Renn: 14 boxes\n[02/09/2026, 18:02:03] Lev: box-istential\n02/09/2026, 18:03 - Mara: lev please\n[02/09/2026, 18:04:00] Lev: <Media omitted>', cast, '2026-09-22');
+  const p = parseSlackPost('Boxes\n[02/09/2026, 18:01:22] Renn: 14 boxes\n[02/09/2026, 18:02:03] Lev: box-istential\n02/09/2026, 18:03 - Kabir: lev please\n[02/09/2026, 18:04:00] Lev: <Media omitted>', cast, '2026-09-22');
   assert.equal(p.date, '2026-09-02');
   assert.equal(p.via, 'whatsapp');
-  assert.deepEqual(p.lines.map((l) => l.id), ['renn', 'lev', 'mara']);
+  assert.deepEqual(p.lines.map((l) => l.id), ['renn', 'lev', 'kabir']);
 });
 
 test('pasted Telegram and unknown speaker', () => {
@@ -40,4 +40,10 @@ test('round trip: markdown body renders the same speakers', () => {
 test('stage directions in body', () => {
   const msgs = parseBody('lev: hi\n(three hours later)\nrenn: hi', cast);
   assert.equal(msgs[1].who, null);
+});
+
+test('"> " lines continue the previous bubble', () => {
+  const msgs = parseBody('kabir: she said\n> her: no\nlev: ok', cast);
+  assert.deepEqual(msgs.map((m) => m.who?.id), ['kabir', 'lev']);
+  assert.equal(msgs[0].text, 'she said\nher: no');
 });
