@@ -12,7 +12,6 @@ const entries = defineCollection({
     via: z.string().optional(),
     images: z.array(z.string()).default([]),
     caption: z.string().optional(),
-    slack_ts: z.string().optional(),
   }),
 });
 

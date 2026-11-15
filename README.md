@@ -1,23 +1,21 @@
 # Pun Times with Phriends
 
-A small static site for the banter: chat-bubble entries, comics, and a Slack bot that publishes them.
+A small static site for the banter: chat-bubble entries and comics.
 
-- **Site:** Astro, built by GitHub Actions and hosted on GitHub Pages (free).
+- **Site:** Astro, built by GitHub Actions and hosted on GitHub Pages (free). Every push to `main` deploys it.
 - **Entries:** one Markdown file each in `src/content/entries/`.
 - **Cast and colours:** `shared/cast.json`. **Site settings:** `shared/site.json`.
-- **Slack bot ("Punbot"):** a Cloudflare Worker in `worker/`. Post in `#puntimes` and the bot commits the entry here.
 
-## Writing an entry
+## Adding an entry
 
-Post it in `#puntimes` in Slack, or add a file here by hand:
+Send the exchange to Claude in the app and it commits the file here. Or add a file by hand:
 
 ```md
 ---
-title: "The cheese situation"
 date: 2026-09-21
-tags: ["food", "pun-duel"]
-groan: 4          # groan-o-meter, 0–5 (optional)
-via: "whatsapp"   # optional
+tags: ["food", "pun-duel"]   # optional
+groan: 4                     # groan-o-meter, 0–5 (optional)
+via: "whatsapp"              # optional
 ---
 lev: I've started making my own cheese
 renn: and how's that going
@@ -25,62 +23,19 @@ renn: and how's that going
 lev: it's been a grate learning experience
 ```
 
+- Name the file `YYYY-MM-DD-slug.md`. The slug becomes the URL: `/<year>/<slug>/`.
+- `title` is optional. Use one only when a word or two sums the exchange up, like `title: "chic."`. Untitled entries show their first line in the archive and the browser tab.
+- `date` can include a time (`"2026-11-15T12:05:00+01:00"`) to order several entries from the same day. Newer entries come first on the site.
 - `name: text` is one bubble. Names are matched against the ids, names and aliases in `cast.json`, and `me` always means you.
 - A line without a name continues the previous bubble.
 - `(text in brackets)` becomes a small centred stage direction.
 - Comics: add `images: ["comics/2026/file.png", …]` (files go in `public/comics/…`) and, optionally, a `caption`.
 
-### In Slack
+## Hosting
 
-```
-The cheese situation
-#food #pun-duel groan:4
-
-lev: I've started making my own cheese
-me: and how's that going
-```
-
-- The first line is the title. The second line holds optional tags, `groan:N`, `date:YYYY-MM-DD` and `via:…`.
-- Lines copied from WhatsApp (`[21/09/2026, 10:12] Lev: …`) or Telegram (`Lev, [21.09.26 10:12]`) can be pasted as they are. The date is taken from the chat.
-- Attach images to make a comic. Any text after the title becomes the caption.
-- **Edit** the Slack post to update the entry. **Delete** it, or reply `undo` in its thread, to take the entry down.
-- A post starting with `//` is ignored, so you can leave notes to yourself in the channel.
-
-## Setup (one time)
-
-### 1. GitHub repo and Pages
-1. Create an empty repo called `puntimes` and push this folder to it.
-2. Go to repo **Settings → Pages → Source** and choose **GitHub Actions**.
-3. Every push to `main` then builds the site and deploys it to `https://<you>.github.io/puntimes/`.
-4. Custom domain (optional): add it under Settings → Pages. Then set the repo **variables** `SITE_URL=https://yourdomain` and `BASE_PATH=/`.
-
-### 2. GitHub token for the bot
-Create a **fine-grained personal access token** (Settings → Developer settings) with:
-- access to **only the `puntimes` repository**
-- **Contents: Read and write**
-
-### 3. Cloudflare Worker
-```sh
-cd worker
-npm install
-npx wrangler login
-# edit wrangler.toml: GITHUB_REPO, SITE_URL (fill in the Slack IDs after step 4)
-npx wrangler secret put GITHUB_TOKEN
-npx wrangler deploy     # prints https://punbot.<your-subdomain>.workers.dev
-```
-
-### 4. Slack app
-1. Go to <https://api.slack.com/apps>, choose **Create New App → From a manifest**, pick your workspace and paste `worker/slack-manifest.yml`. Put your worker URL in `request_url` first.
-2. **Install to workspace.** Then copy the **Bot User OAuth Token** (`xoxb-…`) and the **Signing Secret** (under Basic Information):
-   ```sh
-   npx wrangler secret put SLACK_BOT_TOKEN
-   npx wrangler secret put SLACK_SIGNING_SECRET
-   ```
-3. Create the private channel `#puntimes` and type `/invite @Punbot` in it.
-4. Put the channel ID and your member ID in `wrangler.toml`, then run `npx wrangler deploy` again.
-5. Under **Event Subscriptions**, check that the Request URL shows as *Verified*. If it doesn't, click *Retry*.
-
-Only posts from `SLACK_USER_ID` in `SLACK_CHANNEL_ID` are published.
+1. In the repo, **Settings → Pages → Source** is set to **GitHub Actions**.
+2. Every push to `main` builds the site and deploys it to `https://<you>.github.io/puntimes/`.
+3. Custom domain (optional): add it under Settings → Pages. Then set the repo **variables** `SITE_URL=https://yourdomain` and `BASE_PATH=/`.
 
 ## Local development
 ```sh
