@@ -7,5 +7,7 @@
   { "id": "tania", "name": "Tania", "color": "#D8CFE6", "ink": "#2A2140", "aliases": [] },
   { "id": "qi",    "name": "Qi",    "color": "#F4A07A", "ink": "#3A1405", "aliases": [] },
   { "id": "niharika", "name": "Niharika", "color": "#C68B2C", "ink": "#1F1403", "aliases": ["nihu"] },
-  { "id": "alba",  "name": "Alba",  "color": "#D9677F", "ink": "#FFFFFF", "aliases": [] }
+  { "id": "alba",  "name": "Alba",  "color": "#D9677F", "ink": "#FFFFFF", "aliases": [] },
+  { "id": "tarini", "name": "Tarini", "color": "#BFD8B8", "ink": "#1A2E16", "aliases": [] },
+  { "id": "nadir", "name": "Nadir", "color": "#C9A3C4", "ink": "#2D1229", "aliases": [] }
 ]
