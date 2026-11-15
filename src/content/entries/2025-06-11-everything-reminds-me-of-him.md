@@ -4,4 +4,7 @@ via: "whatsapp"
 ---
 renn: ![Lego battle droid figure](/media/2025/lego-droid.jpg)
 renn: everything reminds me of him
-(😭 from Asad, 😂 from Alba, ☠️ from Kabir and Niharika)
+asad: 😭
+alba: 😂
+kabir: ☠️
+niharika: ☠️
