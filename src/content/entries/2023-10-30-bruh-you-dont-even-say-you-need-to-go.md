@@ -4,7 +4,7 @@ via: "whatsapp"
 ---
 kabir: bruh you don't even say you need to go
 kabir: your eyes just glaze over and you go into autopilot "ah yes, of course" mode
-kabir: A @renn & @Asad Farooqi common trait, might I say
+kabir: A @Renn & @Asad common trait, might I say
 kabir: In Barbados Renn once looked intently at my face for like a good 3 minutes while I was rambling about something (not distracted with her phone or anything), and then I asked her a question and she was like "sorry I wasn't actually listening"
 >
 > BRO PLS

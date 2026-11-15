@@ -26,5 +26,5 @@ carl: Hey who doesn't like getting married
 asad: what's rude is Lev putting us through a decade of will-they, won't-they
 asad: only to yes-they without having us there
 asad: tsk
-asad: But yay congratulations @renn !! 🩷🩷
+asad: But yay congratulations @Renn !! 🩷🩷
 niharika: I think lev is the one who needs to be congratulated. He lucked out. Not renn
