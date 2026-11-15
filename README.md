@@ -28,6 +28,7 @@ lev: it's been a grate learning experience
 - `date` can include a time (`"2026-11-15T12:05:00+01:00"`) to order several entries from the same day. Newer entries come first on the site.
 - `name: text` is one bubble. Names are matched against the ids, names and aliases in `cast.json`, and `me` always means you.
 - A line without a name continues the previous bubble.
+- A line starting with `>` always continues the previous bubble, even if it looks like `name: text`. A lone `>` adds a blank line inside the bubble.
 - `(text in brackets)` becomes a small centred stage direction.
 - Pictures in a chat: a bubble that is only `renn: ![Happy Thursday greeting card](/media/2024/happy-thursday.jpg)` shows that picture in Renn's bubble. Files go in `public/media/…`; start the path with `/`.
 - Comics: add `images: ["comics/2026/file.png", …]` (files go in `public/comics/…`) and, optionally, a `caption`.
