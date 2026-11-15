@@ -1,5 +1,4 @@
 ---
-title: "waiting for the plane to take off"
 date: "2026-11-15T12:14:00+01:00"
 ---
 (waiting for the plane to take off)

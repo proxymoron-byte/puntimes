@@ -1,5 +1,4 @@
 ---
-title: "im mad at you because i just remembered that you had a girlf"
 date: 2025-10-01
 via: "tumblr"
 tumblr_id: "796217099527847937"

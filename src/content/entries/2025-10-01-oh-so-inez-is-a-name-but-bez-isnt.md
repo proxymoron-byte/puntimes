@@ -1,5 +1,5 @@
 ---
-title: "oh so Inez is a name but Bez isnt?"
+title: "bezos."
 date: 2025-10-01
 via: "tumblr"
 tumblr_id: "796217165176061952"

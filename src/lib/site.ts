@@ -18,6 +18,12 @@ export async function allEntries(): Promise<Entry[]> {
 export const slugOf = (e: Entry) => e.id.replace(/^\d{4}-\d{2}-\d{2}-/, '');
 export const entryPath = (e: Entry) => `${e.data.date.getUTCFullYear()}/${slugOf(e)}/`;
 export const messagesOf = (e: Entry) => parseBody(e.body ?? '', cast);
+/** The title, or for an untitled entry its first line, for page titles and links. */
+export function labelOf(e: Entry): string {
+  if (e.data.title) return e.data.title;
+  const first = messagesOf(e).find((m) => m.text.trim())?.text.split('\n')[0].trim() ?? '';
+  return first.length > 60 ? first.slice(0, 59).trimEnd() + '…' : first || fmtDate(e.data.date);
+}
 export const isComic = (e: Entry) => e.data.images.length > 0;
 
 /** Cast ids appearing in an entry. */

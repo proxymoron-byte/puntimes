@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { allEntries, entryPath, url } from '../lib/site';
+import { allEntries, entryPath, labelOf, url } from '../lib/site';
 const list = await allEntries();
 const years = [...new Set(list.map((e) => e.data.date.getUTCFullYear()))];
 const md = (d: Date) => d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', timeZone: 'UTC' });
@@ -11,7 +11,7 @@ const md = (d: Date) => d.toLocaleDateString('en-GB', { day: '2-digit', month: '
     <section class="yr">
       <h2>{y}</h2>
       <ul>{list.filter((e) => e.data.date.getUTCFullYear() === y).map((e) => (
-        <li><time>{md(e.data.date)}</time><a href={url(entryPath(e))}>{e.data.title}</a>{e.data.images.length > 0 && <span>comic</span>}</li>
+        <li><time>{md(e.data.date)}</time><a href={url(entryPath(e))}>{labelOf(e)}</a>{e.data.images.length > 0 && <span>comic</span>}</li>
       ))}</ul>
     </section>
   ))}

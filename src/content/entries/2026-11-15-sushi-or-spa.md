@@ -1,5 +1,4 @@
 ---
-title: "sushi or spa"
 date: "2026-11-15T12:17:00+01:00"
 ---
 renn: I want sushi and I want a spa but I can't do them in the same evening

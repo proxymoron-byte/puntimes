@@ -1,5 +1,5 @@
 ---
-title: "we're the vegetables"
+title: "vegetables."
 date: "2026-11-15T12:19:00+01:00"
 ---
 (rotting on the couch together)

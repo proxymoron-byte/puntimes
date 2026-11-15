@@ -1,5 +1,4 @@
 ---
-title: "I love you very much"
 date: "2026-11-15T12:10:00+01:00"
 ---
 renn: I love you very much

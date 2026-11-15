@@ -1,5 +1,4 @@
 ---
-title: "there’s an ethereal creature walking in front of me to work."
 date: 2025-10-01
 via: "tumblr"
 tumblr_id: "796217212735225856"

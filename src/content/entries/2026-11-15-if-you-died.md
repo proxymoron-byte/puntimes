@@ -1,5 +1,4 @@
 ---
-title: "if you died"
 date: "2026-11-15T12:04:00+01:00"
 ---
 renn: if you died, I would just kill myself

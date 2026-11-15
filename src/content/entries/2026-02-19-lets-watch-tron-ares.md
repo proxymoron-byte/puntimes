@@ -1,5 +1,5 @@
 ---
-title: "let’s watch Tron: Ares"
+title: "tronsphobic."
 date: 2026-02-19
 via: "tumblr"
 tumblr_id: "809014372125097984"

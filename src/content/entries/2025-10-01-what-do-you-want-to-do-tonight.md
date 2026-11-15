@@ -1,5 +1,4 @@
 ---
-title: "what do you want to do tonight"
 date: 2025-10-01
 via: "tumblr"
 tumblr_id: "796217256658993152"

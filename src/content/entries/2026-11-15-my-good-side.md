@@ -1,5 +1,5 @@
 ---
-title: "my good side"
+title: "good side."
 date: "2026-11-15T12:22:00+01:00"
 ---
 renn: oh look, there's a photo of you

@@ -1,5 +1,4 @@
 ---
-title: "did you know that gambling is the deadliest vice"
 date: 2023-07-27
 via: "tumblr"
 tumblr_id: "724044321212547072"

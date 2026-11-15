@@ -1,5 +1,5 @@
 ---
-title: "gazing into the male psyche"
+title: "male psyche."
 date: "2026-11-15T12:20:00+01:00"
 ---
 renn: I'm nauseous
