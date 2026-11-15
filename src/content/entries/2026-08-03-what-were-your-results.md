@@ -14,3 +14,4 @@ kabir: best I can do is that my type is women who wear green
 renn: yeah I wish they'd include more interesting looking people
 renn: they didn't have anyone for me where I was like 'oh yeah def him'
 renn: like where was that guy
+renn: ![Drawing of a lanky man in boxer shorts](/media/2026/that-guy.jpg)
