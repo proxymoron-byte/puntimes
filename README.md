@@ -29,6 +29,7 @@ lev: it's been a grate learning experience
 - `name: text` is one bubble. Names are matched against the ids, names and aliases in `cast.json`, and `me` always means you.
 - A line without a name continues the previous bubble.
 - `(text in brackets)` becomes a small centred stage direction.
+- Pictures in a chat: a bubble that is only `renn: ![Happy Thursday greeting card](/media/2024/happy-thursday.jpg)` shows that picture in Renn's bubble. Files go in `public/media/…`; start the path with `/`.
 - Comics: add `images: ["comics/2026/file.png", …]` (files go in `public/comics/…`) and, optionally, a `caption`.
 
 ## Hosting

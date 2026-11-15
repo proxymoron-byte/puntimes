@@ -40,6 +40,11 @@ export function parseBody(body, cast) {
       msgs.push({ who: null, text: line.trim() }); // narration / stage direction
     }
   }
+  // a bubble that is only `![alt](path)` shows that picture
+  for (const m of msgs) {
+    const img = m.who && m.text.match(/^!\[([^\]]*)\]\(([^)\s]+)\)$/);
+    if (img) Object.assign(m, { text: '', image: { alt: img[1], src: img[2] } });
+  }
   // mark runs so consecutive bubbles from one speaker only show the name once
   msgs.forEach((m, i) => { m.cont = i > 0 && msgs[i - 1].who && m.who && msgs[i - 1].who.id === m.who.id; });
   return msgs;
