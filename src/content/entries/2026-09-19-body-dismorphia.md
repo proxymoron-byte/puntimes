@@ -1,6 +1,6 @@
 ---
 title: "mridicuous."
-date: "2026-11-15T12:16:00+01:00"
+date: "2026-09-19T12:00:00+02:00"
 ---
 renn: you have to be nicer to me, i literally have body dismorphia
 lev: so go on hrt

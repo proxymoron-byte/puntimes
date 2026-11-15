@@ -1,6 +1,6 @@
 ---
 title: "male psyche."
-date: "2026-11-15T12:20:00+01:00"
+date: "2026-10-26T12:00:00+01:00"
 ---
 renn: I'm nauseous
 renn: I think it's because I'm finding out that all men are dogs

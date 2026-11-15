@@ -1,6 +1,6 @@
 ---
 title: "vegetables."
-date: "2026-11-15T12:19:00+01:00"
+date: "2026-10-18T12:01:00+02:00"
 ---
 (rotting on the couch together)
 renn: will you look at this table in front of us... chips, popcorn, haribos, sodas...

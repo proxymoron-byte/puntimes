@@ -1,5 +1,5 @@
 ---
-date: "2026-11-15T12:17:00+01:00"
+date: "2026-10-12T12:00:00+02:00"
 ---
 renn: I want sushi and I want a spa but I can't do them in the same evening
 renn: if I have the spa first and then sushi I'd be too relaxed and sleepy at the restaurant

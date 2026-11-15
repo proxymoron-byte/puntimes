@@ -1,5 +1,5 @@
 ---
-date: "2026-11-15T12:18:00+01:00"
+date: "2026-10-18T12:00:00+02:00"
 ---
 lev: will you come downstairs with me to pick up the food
 renn: don't you want to have alone time looking at your phone
